@@ -8,20 +8,19 @@ namespace APIs.Controller
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    [ControllerDescription("Danh sách trạng thái phòng")]
-
-    public class RoomsStatusController : BaseApiController
+    [ControllerDescription("Danh sách APIsEndpoint")]
+    public class APIsEndpointController : BaseApiController
     {
-        private readonly IRoomsStatusHandler _IStatusHandler;
+        private readonly IAPIsEndpointHandler _IAPIsEndpointHandler;
         private readonly IFindDataHandler _IFindDataHandler;
 
-        public RoomsStatusController
+        public APIsEndpointController
         (
-            IRoomsStatusHandler IStatusHandler,
+            IAPIsEndpointHandler IAPIsEndpointHandler,
             IFindDataHandler IFindDataHandler
         )
         {
-            _IStatusHandler = IStatusHandler;
+            _IAPIsEndpointHandler = IAPIsEndpointHandler;
             _IFindDataHandler = IFindDataHandler;
         }
 
@@ -43,19 +42,18 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "StatusCode": "admmin",
-        ///         "StatusName":"123456",
-        ///         "StatusColor":"CuongNH"
+        ///         "APIsEndpointName":"123456",
+        ///         "APIsEndpointUrl": "/User/Create"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Create(CreateRoomsStatus entity)
+        public async Task<Response<bool>> Create(CreateAPIsEndpoint entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.CreateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IAPIsEndpointHandler.CreateAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
@@ -78,20 +76,19 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "StatusId": "DBA96C30-5A03-40C8-95F0-184C0390B92C",
-        ///         "StatusCode": "admmin",
-        ///         "StatusName":"123456",
-        ///         "StatusColor":"CuongNH"
+        ///         "APIsEndpointId": "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///         "APIsEndpointName":"123456",
+        ///         "APIsEndpointUrl": "/User/Create"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Update(UpdateRoomsStatus entity)
+        public async Task<Response<bool>> Update(UpdateAPIsEndpoint entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.UpdateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IAPIsEndpointHandler.UpdateAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -113,17 +110,17 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {        
-        ///         "StatusId": "DBA96C30-5A03-40C8-95F0-184C0390B92C"
+        ///         "APIsEndpointId": "DBA96C30-5A03-40C8-95F0-184C0390B92C"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Delete(DeleteRoomsStatus entity)
+        public async Task<Response<bool>> Delete(DeleteAPIsEndpoint entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.DeleteStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IAPIsEndpointHandler.DeleteAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -152,11 +149,11 @@ namespace APIs.Controller
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<InfoOfRoomsStatus>> FindById(FindById entity)
+        public async Task<Response<InfoOfAPIsEndpoint>> FindById(FindById entity)
         {
-            string tableName = EnumsTableName.Table.Status.ToString();
+            string tableName = EnumsTableName.Table.APIsEndpoint.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindById<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindById<InfoOfAPIsEndpoint>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -185,11 +182,11 @@ namespace APIs.Controller
         /// </remarks>
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<ResponseTable<InfoOfRoomsStatus>> FindAll(FindAll entity)
+        public async Task<ResponseTable<InfoOfAPIsEndpoint>> FindAll(FindAll entity)
         {
-            string tableName = EnumsTableName.Table.Status.ToString();
+            string tableName = EnumsTableName.Table.APIsEndpoint.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindAll<InfoOfAPIsEndpoint>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }

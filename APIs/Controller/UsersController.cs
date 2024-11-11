@@ -8,6 +8,7 @@ namespace APIs.Controller
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [ControllerDescription("Danh sách Tài khoản")]
 
     public class UsersController : BaseApiController
     {
@@ -32,14 +33,22 @@ namespace APIs.Controller
         /// 
         /// METHOD : POST
         /// 
-        /// I, Thẻ headers chọn Content-Type : FormData
+        /// I, Thẻ headers chọn Content-Type : application/json
         /// 
+        /// II, Thẻ body - raw - đổi text thành Json
         /// 
-        /// II, Tham số bỏ qua
+        /// III, Json mẫu
         /// 
-        ///     AvatarPublicUrl : "1"
-        ///         
-        ///     AvatarFileSave : "1"
+        ///     {
+        ///         "UsersName": "admmin",
+        ///         "UsersPassword":"123456",
+        ///         "FullName":"CuongNH",
+        ///         "Address":"Hà Nội",
+        ///         "NumberPhone":"123456",
+        ///         "StateIDCard":"123456",
+        ///         "Email":"123456@gmail.com",
+        ///         "UsersLanguage":"VN"
+        ///     }
         /// 
         /// </remarks>
 
@@ -60,13 +69,22 @@ namespace APIs.Controller
         /// 
         /// METHOD : POST
         /// 
-        /// I, Thẻ headers chọn Content-Type : FormData
+        /// I, Thẻ headers chọn Content-Type : application/json
         /// 
-        /// II, Tham số bỏ qua
+        /// II, Thẻ body - raw - đổi text thành Json
         /// 
-        ///     AvatarPublicUrl : "1"
-        ///         
-        ///     AvatarFileSave : "1
+        /// III, Json mẫu
+        /// 
+        ///     {
+        ///         "UserId": "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///         "UsersPassword":"123456",
+        ///         "FullName":"CuongNH",
+        ///         "Address":"Hà Nội",
+        ///         "NumberPhone":"123456",
+        ///         "StateIDCard":"123456",
+        ///         "Email":"123456@gmail.com",
+        ///         "UsersLanguage":"VN"
+        ///     }
         /// 
         /// </remarks>
 

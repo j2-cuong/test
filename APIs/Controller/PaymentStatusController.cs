@@ -8,6 +8,7 @@ namespace APIs.Controller
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [ControllerDescription("Danh sách trạng thái thanh toán")]
 
     public class PaymentStatusController : BaseApiController
     {
@@ -174,7 +175,6 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "IdLogin" : "7004E920-892A-45AE-BBE2-C3E485C370AB",
         ///         "PageSize": 10,
         ///         "PageIndex" : 1
         ///     }

@@ -155,6 +155,51 @@ namespace CommonServices
         public const string ERROR_IS_USING_PAYMENTSTATUS_MESS_KR = "상태가 다른 기록에서 사용 중입니다. 다시 확인해 주세요!";
         public const string ERROR_IS_USING_PAYMENTSTATUS_MESS_JP = "このステータスは別のレコードで使用されています。もう一度確認してください。！";
 
+
+        public const int ERROR_DUPPLICATE_USERGROUP_CODE = -2014;
+        public const string ERROR_DUPPLICATE_USERGROUP_MESS_VN = "Mã nhóm quyền đã tồn tại!";
+        public const string ERROR_DUPPLICATE_USERGROUP_MESS_EN = "User group code already exists!";
+        public const string ERROR_DUPPLICATE_USERGROUP_MESS_CN = "用户组代码已存在！";
+        public const string ERROR_DUPPLICATE_USERGROUP_MESS_KR = "사용자 그룹 코드가 이미 존재합니다!";
+        public const string ERROR_DUPPLICATE_USERGROUP_MESS_JP = "ユーザーグループコードは既に存在します！";
+
+        public const int ERROR_DUPPLICATE_USERGROUP_NAME_CODE = -2015;
+        public const string ERROR_DUPPLICATE_USERGROUP_NAME_MESS_VN = "Tên nhóm quyền đã tồn tại!";
+        public const string ERROR_DUPPLICATE_USERGROUP_NAME_MESS_EN = "User group name already exists!";
+        public const string ERROR_DUPPLICATE_USERGROUP_NAME_MESS_CN = "用户组名称已存在！";
+        public const string ERROR_DUPPLICATE_USERGROUP_NAME_MESS_KR = "사용자 그룹 이름이 이미 존재합니다!";
+        public const string ERROR_DUPPLICATE_USERGROUP_NAME_MESS_JP = "ユーザーグループ名は既に存在します！";
+
+        public const int ERROR_IS_USING_USERGROUP_CODE = -2016;
+        public const string ERROR_IS_USING_USERGROUP_MESS_VN = "Nhóm quyền đang được sử dụng ở 1 bản ghi khác, vui lòng kiểm tra lại!";
+        public const string ERROR_IS_USING_USERGROUP_MESS_EN = "The user group is being used in another record, please check again!";
+        public const string ERROR_IS_USING_USERGROUP_MESS_CN = "用户组正在被另一个记录使用，请重新检查！";
+        public const string ERROR_IS_USING_USERGROUP_MESS_KR = "사용자 그룹이 다른 기록에서 사용 중입니다. 다시 확인해 주세요!";
+        public const string ERROR_IS_USING_USERGROUP_MESS_JP = "ユーザーグループは他のレコードで使用されています。再度ご確認ください！";
+
+        public const int ERROR_DUPPLICATE_APISENDPOINT_URL_CODE = -2017;
+        public const string ERROR_DUPPLICATE_APISENDPOINT_URL_MESS_VN = "Url APIsEndpoint đã tồn tại!";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_URL_MESS_EN = "API Endpoint URL already exists!";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_URL_MESS_CN = "API端点URL已存在！";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_URL_MESS_KR = "API 엔드포인트 URL이 이미 존재합니다!";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_URL_MESS_JP = "APIエンドポイントのURLはすでに存在します！";
+
+        public const int ERROR_DUPPLICATE_APISENDPOINT_NAME_CODE = -2018;
+        public const string ERROR_DUPPLICATE_APISENDPOINT_NAME_MESS_VN = "Tên APIsEndpoint đã tồn tại!";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_NAME_MESS_EN = "API Endpoint name already exists!";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_NAME_MESS_CN = "API端点名称已存在！";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_NAME_MESS_KR = "API 엔드포인트 이름이 이미 존재합니다!";
+        public const string ERROR_DUPPLICATE_APISENDPOINT_NAME_MESS_JP = "APIエンドポイント名はすでに存在します！";
+
+        public const int ERROR_IS_USING_APISENDPOINT_CODE = -2019;
+        public const string ERROR_IS_USING_APISENDPOINT_MESS_VN = "APIsEndpoint đang được sử dụng ở 1 bản ghi khác, vui lòng kiểm tra lại!";
+        public const string ERROR_IS_USING_APISENDPOINT_MESS_EN = "API Endpoint is being used in another record, please check again!";
+        public const string ERROR_IS_USING_APISENDPOINT_MESS_CN = "API端点正在被另一个记录使用，请重新检查！";
+        public const string ERROR_IS_USING_APISENDPOINT_MESS_KR = "API 엔드포인트가 다른 기록에서 사용 중입니다. 다시 확인해 주세요!";
+        public const string ERROR_IS_USING_APISENDPOINT_MESS_JP = "APIエンドポイントは他のレコードで使用されています。再度ご確認ください！";
+
+
+
         #endregion
 
         #region -5xx liên quan tới thông tin bị thay đổi, cần login lại
@@ -187,6 +232,14 @@ namespace CommonServices
         public const string ERROR_NOTHAVE_PERMISSION_BE_MESS_CN = "您没有权限使用此功能!";
         public const string ERROR_NOTHAVE_PERMISSION_BE_MESS_KR = "이 기능을 사용할 권한이 없습니다!";
         public const string ERROR_NOTHAVE_PERMISSION_BE_MESS_JP = "この機能を使用する権限がありません！";
+
+        public const int ERROR_DUPLICATE_USERID_BE_CODE = -702;
+        public const string ERROR_DUPLICATE_USERID_BE_MESS_VN = "Tài khoản đã nằm trong nhóm quyền khác, Vui lòng kiểm tra lại!";
+        public const string ERROR_DUPLICATE_USERID_BE_MESS_EN = "The account is already in another user group, please check again!";
+        public const string ERROR_DUPLICATE_USERID_BE_MESS_CN = "账户 已在其他用户组中，请重新检查！";
+        public const string ERROR_DUPPLICATE_USERID_BE_MESS_KR = "계정 가 다른 사용자 그룹에 이미 있습니다. 다시 확인해 주세요!";
+        public const string ERROR_DUPPLICATE_USERID_BE_MESS_JP = "アカウント は他のユーザーグループに既に存在しています。再度ご確認ください！";
+
 
         /// <summary>
         /// Lỗi này xuất hiện khi 1 user A bị Adminstrator thay đổi thông tin, 

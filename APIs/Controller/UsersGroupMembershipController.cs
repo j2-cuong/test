@@ -8,25 +8,24 @@ namespace APIs.Controller
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    [ControllerDescription("Danh sách trạng thái phòng")]
-
-    public class RoomsStatusController : BaseApiController
+    [ControllerDescription("Phân quyền nhóm người sử dụng")]
+    public class UsersGroupMembershipController : BaseApiController
     {
-        private readonly IRoomsStatusHandler _IStatusHandler;
+        private readonly IUsersGroupMembershipHandler _IUsersGroupMembershipHandler;
         private readonly IFindDataHandler _IFindDataHandler;
 
-        public RoomsStatusController
+        public UsersGroupMembershipController
         (
-            IRoomsStatusHandler IStatusHandler,
+            IUsersGroupMembershipHandler IUsersGroupMembershipHandler,
             IFindDataHandler IFindDataHandler
         )
         {
-            _IStatusHandler = IStatusHandler;
+            _IUsersGroupMembershipHandler = IUsersGroupMembershipHandler;
             _IFindDataHandler = IFindDataHandler;
         }
 
         /// <summary>
-        /// Tạo trạng thái.
+        /// Thêm người dùng vào nhóm quyền
         /// </summary>
         /// <remarks>
         /// Example: sử dụng Postman
@@ -43,24 +42,26 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "StatusCode": "admmin",
-        ///         "StatusName":"123456",
-        ///         "StatusColor":"CuongNH"
+        ///          "UsersGroupId" : "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///          "UsersGroupName": "Tên nhóm quyền", 
+        ///          "UsersId" : "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///          "UsersName" : "Tên tài khoản",
+        ///          "FullName" : "Tên người dùng"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Create(CreateRoomsStatus entity)
+        public async Task<Response<bool>> Create(CreateUsersGroupMembership entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.CreateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupMembershipHandler.CreateUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
         /// <summary>
-        /// Sửa thông tin trạng thái.
+        /// Đổi người dùng trong nhóm quyền
         /// </summary>
         /// <remarks>
         /// Example: sử dụng Postman
@@ -78,24 +79,25 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "StatusId": "DBA96C30-5A03-40C8-95F0-184C0390B92C",
-        ///         "StatusCode": "admmin",
-        ///         "StatusName":"123456",
-        ///         "StatusColor":"CuongNH"
+        ///             "UsersGroupId" : "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///             "UsersGroupName": "Tên nhóm quyền", 
+        ///             "UsersId" : "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///             "UsersName" : "Tên tài khoản",
+        ///             "FullName" : "Tên người dùng"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Update(UpdateRoomsStatus entity)
+        public async Task<Response<bool>> Update(UpdateUsersGroupMembership entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.UpdateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupMembershipHandler.UpdateUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
-        /// Xóa trạng thái.
+        /// Xóa người dùng khỏi nhóm quyền
         /// </summary>
         /// <remarks>
         /// Example: sử dụng Postman
@@ -113,21 +115,25 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {        
-        ///         "StatusId": "DBA96C30-5A03-40C8-95F0-184C0390B92C"
+        ///         "UsersGroupMembershipId": "DBA96C30-5A03-40C8-95F0-184C0390B92C"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Delete(DeleteRoomsStatus entity)
+        public async Task<Response<bool>> Delete(DeleteUsersGroupMembership entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.DeleteStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            string tableName = EnumsTableName.Table.UsersGroupMembership.ToString();
+            FindById findById = new FindById();
+            findById.IdSearch = entity.UsersGroupMembershipId;
+            var oldData = await _IFindDataHandler.FindById<InfoOfUsersGroupMembership>(findById, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IUsersGroupMembershipHandler.DeleteUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), language, oldData.Data[0]);
         }
 
         /// <summary>
-        /// Tìm kiếm theo Id.
+        /// Tìm kiếm nhóm quyền Id. ( Cần sửa lại )
         /// </summary>
         /// <remarks>
         /// Example: sử dụng Postman
@@ -152,11 +158,11 @@ namespace APIs.Controller
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<InfoOfRoomsStatus>> FindById(FindById entity)
+        public async Task<Response<InfoOfUsersGroupMembership>> FindById(FindById entity)
         {
-            string tableName = EnumsTableName.Table.Status.ToString();
+            string tableName = EnumsTableName.Table.UsersGroupMembership.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindById<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindById<InfoOfUsersGroupMembership>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -185,11 +191,11 @@ namespace APIs.Controller
         /// </remarks>
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<ResponseTable<InfoOfRoomsStatus>> FindAll(FindAll entity)
+        public async Task<ResponseTable<InfoOfUsersGroupMembership>> FindAll(FindAll entity)
         {
-            string tableName = EnumsTableName.Table.Status.ToString();
+            string tableName = EnumsTableName.Table.UsersGroupMembership.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindAll<InfoOfUsersGroupMembership>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }

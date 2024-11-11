@@ -26,8 +26,8 @@ namespace APIs.Logic
         private async Task<List<string>> GetUserPermissions(Guid userId)
         {
             DynamicParameters param = new DynamicParameters();
-            param.Add("@UserId", userId);
-            var routers = await _dapperUnitOfWork.GetRepository().ExecuteData<string>("FindAll", param, null);
+            param.Add("@UsersId", userId);
+            var routers = await _dapperUnitOfWork.GetRepository().ExecuteData<string>("GetRoleByUsersId", param, null);
             return routers.ToList();
         }
 

@@ -8,20 +8,20 @@ namespace APIs.Controller
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    [ControllerDescription("Danh sách trạng thái phòng")]
+    [ControllerDescription("Danh sách Nhóm tài khoản")]
 
-    public class RoomsStatusController : BaseApiController
+    public class UsersGroupController : BaseApiController
     {
-        private readonly IRoomsStatusHandler _IStatusHandler;
+        private readonly IUsersGroupHandler _IUsersGroupHandler;
         private readonly IFindDataHandler _IFindDataHandler;
 
-        public RoomsStatusController
+        public UsersGroupController
         (
-            IRoomsStatusHandler IStatusHandler,
+            IUsersGroupHandler IUsersGroupHandler,
             IFindDataHandler IFindDataHandler
         )
         {
-            _IStatusHandler = IStatusHandler;
+            _IUsersGroupHandler = IUsersGroupHandler;
             _IFindDataHandler = IFindDataHandler;
         }
 
@@ -43,19 +43,18 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "StatusCode": "admmin",
-        ///         "StatusName":"123456",
-        ///         "StatusColor":"CuongNH"
+        ///         "UsersGroupCode": "admmin",
+        ///         "UsersGroupName":"123456"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Create(CreateRoomsStatus entity)
+        public async Task<Response<bool>> Create(CreateUsersGroup entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.CreateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupHandler.CreateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
@@ -78,20 +77,19 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "StatusId": "DBA96C30-5A03-40C8-95F0-184C0390B92C",
-        ///         "StatusCode": "admmin",
-        ///         "StatusName":"123456",
-        ///         "StatusColor":"CuongNH"
+        ///         "UsersGroupId": "DBA96C30-5A03-40C8-95F0-184C0390B92C",
+        ///         "UsersGroupCode": "admmin",
+        ///         "UsersGroupName":"123456"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Update(UpdateRoomsStatus entity)
+        public async Task<Response<bool>> Update(UpdateUsersGroup entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.UpdateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupHandler.UpdateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -113,17 +111,17 @@ namespace APIs.Controller
         /// III, Json mẫu
         /// 
         ///     {        
-        ///         "StatusId": "DBA96C30-5A03-40C8-95F0-184C0390B92C"
+        ///         "UsersGroupId": "DBA96C30-5A03-40C8-95F0-184C0390B92C"
         ///     }
         /// 
         /// </remarks>
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<bool>> Delete(DeleteRoomsStatus entity)
+        public async Task<Response<bool>> Delete(DeleteUsersGroup entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IStatusHandler.DeleteStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupHandler.DeleteUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -152,11 +150,11 @@ namespace APIs.Controller
 
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<Response<InfoOfRoomsStatus>> FindById(FindById entity)
+        public async Task<Response<InfoOfUsersGroup>> FindById(FindById entity)
         {
-            string tableName = EnumsTableName.Table.Status.ToString();
+            string tableName = EnumsTableName.Table.UsersGroup.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindById<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindById<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -185,11 +183,11 @@ namespace APIs.Controller
         /// </remarks>
         [HttpPost]
         [ServiceFilter(typeof(PermissionFilter))]
-        public async Task<ResponseTable<InfoOfRoomsStatus>> FindAll(FindAll entity)
+        public async Task<ResponseTable<InfoOfUsersGroup>> FindAll(FindAll entity)
         {
-            string tableName = EnumsTableName.Table.Status.ToString();
+            string tableName = EnumsTableName.Table.UsersGroup.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindAll<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }

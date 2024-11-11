@@ -5,12 +5,13 @@ using CommonServices;
 using Dapper;
 using DapperServices;
 using System.Data.SqlClient;
+using static APIs.Middleware.ServiceCollection;
 
 namespace APIs.Helper
 {
     public static class FindDuplicateRoomsStatusInfo
     {
-        private static string _connect = DataProcessServiceCollection.GetConnect();
+        private static string _connect = ConnectionStringProvider.PortalConnection;
 
         /// <summary>
         /// Tìm kiếm các giá trị trùng lặp trong bảng Status
