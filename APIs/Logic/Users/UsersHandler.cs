@@ -240,7 +240,7 @@ namespace APIs.Logic
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@PageSize", model.PageSize == 0 ? 10 : model.PageSize);
                 param.Add("@PageIndex", model.PageIndex == 0 ? 1 : model.PageIndex);
-                param.Add("@Url", urlServer ?? "localhost:7223");
+                param.Add("@urlServer", urlServer);
 
                 var res = await _dapperUnitOfWork.GetRepository().ExecuteData<InfoOfUsers>("FindAllUsers", param, null);
                 var data = res.ToArray();
@@ -256,7 +256,7 @@ namespace APIs.Logic
             catch (Exception ex)
             {
                 ConvertLog.WriteLog(_logger, controller, ex.Message, IpClient);
-                result = GetStatusFunction.HandleCheckResponseWithTable<InfoOfUsers>(StatusResult.ERROR_FAIL_CODE, "EN", null);
+                result = GetStatusFunction.HandleCheckResponseWithTable<InfoOfUsers>(StatusResult.ERROR_FAIL_CODE, language, null);
             }
             return result;
         }
@@ -291,7 +291,7 @@ namespace APIs.Logic
             catch (Exception ex)
             {
                 ConvertLog.WriteLog(_logger, controller, ex.Message, IpClient);
-                result = GetStatusFunction.HandleCheckResponseWithT<InfoOfUsers>(StatusResult.ERROR_FAIL_CODE, "EN", null);
+                result = GetStatusFunction.HandleCheckResponseWithT<InfoOfUsers>(StatusResult.ERROR_FAIL_CODE, language, null);
             }
             return result;
         }

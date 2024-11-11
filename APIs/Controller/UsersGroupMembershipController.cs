@@ -35,10 +35,7 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
-        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -58,7 +55,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Create(CreateUsersGroupMembership entity)
         {
-            return await _IUsersGroupMembershipHandler.CreateUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersGroupMembershipHandler.CreateUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
@@ -75,8 +73,6 @@ namespace APIs.Controller
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -96,7 +92,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Update(UpdateUsersGroupMembership entity)
         {
-            return await _IUsersGroupMembershipHandler.UpdateUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersGroupMembershipHandler.UpdateUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -113,8 +110,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -129,11 +124,12 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Delete(DeleteUsersGroupMembership entity)
         {
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
             string tableName = EnumsTableName.Table.UsersGroupMembership.ToString();
             FindById findById = new FindById();
             findById.IdSearch = entity.UsersGroupMembershipId;
-            var oldData = await _IFindDataHandler.FindById<InfoOfUsersGroupMembership>(findById, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
-            return await _IUsersGroupMembershipHandler.DeleteUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage(), oldData.Data[0]);
+            var oldData = await _IFindDataHandler.FindById<InfoOfUsersGroupMembership>(findById, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IUsersGroupMembershipHandler.DeleteUsersGroupMembership(entity, GetClientIp(), GetPath(), GetUsersId(), language, oldData.Data[0]);
         }
 
         /// <summary>
@@ -150,8 +146,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -167,7 +161,8 @@ namespace APIs.Controller
         public async Task<Response<InfoOfUsersGroupMembership>> FindById(FindById entity)
         {
             string tableName = EnumsTableName.Table.UsersGroupMembership.ToString();
-            return await _IFindDataHandler.FindById<InfoOfUsersGroupMembership>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindById<InfoOfUsersGroupMembership>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -184,8 +179,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -201,7 +194,8 @@ namespace APIs.Controller
         public async Task<ResponseTable<InfoOfUsersGroupMembership>> FindAll(FindAll entity)
         {
             string tableName = EnumsTableName.Table.UsersGroupMembership.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfUsersGroupMembership>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindAll<InfoOfUsersGroupMembership>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿-- Kiểm tra và xóa stored procedure FindAllUsers nếu tồn tại
-IF OBJECT_ID('dbo.FindAllUsers', 'P') IS NOT NULL
+﻿-- Kiểm tra và xóa stored procedure FindAllrs nếu tồn tại
+IF OBJECT_ID('dbo.FindAllrs', 'P') IS NOT NULL
 BEGIN
-    DROP PROCEDURE dbo.FindAllUsers;
+    DROP PROCEDURE dbo.FindAllrs;
 END
 GO
 
--- Tạo stored procedure FindAllUsers mới
-CREATE PROCEDURE [dbo].[FindAllUsers]
+-- Tạo stored procedure FindAllrs mới
+CREATE PROCEDURE [dbo].[FindAllrs]
 (
     @PageSize INT, 
     @PageIndex INT,

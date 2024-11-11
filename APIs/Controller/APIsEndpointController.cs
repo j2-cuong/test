@@ -35,10 +35,7 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
-        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -55,7 +52,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Create(CreateAPIsEndpoint entity)
         {
-            return await _IAPIsEndpointHandler.CreateAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IAPIsEndpointHandler.CreateAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
@@ -73,8 +71,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -91,7 +87,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Update(UpdateAPIsEndpoint entity)
         {
-            return await _IAPIsEndpointHandler.UpdateAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IAPIsEndpointHandler.UpdateAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -108,8 +105,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -124,7 +119,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Delete(DeleteAPIsEndpoint entity)
         {
-            return await _IAPIsEndpointHandler.DeleteAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IAPIsEndpointHandler.DeleteAPIsEndpoint(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -141,8 +137,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -158,7 +152,8 @@ namespace APIs.Controller
         public async Task<Response<InfoOfAPIsEndpoint>> FindById(FindById entity)
         {
             string tableName = EnumsTableName.Table.APIsEndpoint.ToString();
-            return await _IFindDataHandler.FindById<InfoOfAPIsEndpoint>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindById<InfoOfAPIsEndpoint>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -175,8 +170,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -192,7 +185,8 @@ namespace APIs.Controller
         public async Task<ResponseTable<InfoOfAPIsEndpoint>> FindAll(FindAll entity)
         {
             string tableName = EnumsTableName.Table.APIsEndpoint.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfAPIsEndpoint>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindAll<InfoOfAPIsEndpoint>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }

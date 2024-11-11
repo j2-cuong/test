@@ -56,7 +56,8 @@ namespace APIs.Controller
 
         public async Task<Response<bool>> Create(CreateUsersModel entity)
         {
-            return await _IUsersHandler.CreateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.CreateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), language);
         }
 
 
@@ -69,10 +70,6 @@ namespace APIs.Controller
         /// METHOD : POST
         /// 
         /// I, Thẻ headers chọn Content-Type : application/json
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -95,7 +92,8 @@ namespace APIs.Controller
         //[ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Update(UpdateUsersModel entity)
         {
-            return await _IUsersHandler.UpdateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.UpdateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -110,10 +108,6 @@ namespace APIs.Controller
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// III, Json mẫu
         /// 
         ///     {        
@@ -123,10 +117,11 @@ namespace APIs.Controller
         /// </remarks>
 
         [HttpPost]
-        //[ServiceFilter(typeof(PermissionFilter))]
+        [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Delete(DeleteUser entity)
         {
-            return await _IUsersHandler.DeleteUsers(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.DeleteUsers(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -139,10 +134,6 @@ namespace APIs.Controller
         /// 
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -154,10 +145,11 @@ namespace APIs.Controller
         /// </remarks>
 
         [HttpPost]
-        //[ServiceFilter(typeof(PermissionFilter))]
+        [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Block(BlockUser entity)
         {
-            return await _IUsersHandler.BlockUsers(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.BlockUsers(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -170,10 +162,6 @@ namespace APIs.Controller
         /// 
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -185,10 +173,11 @@ namespace APIs.Controller
         /// </remarks>
 
         [HttpPost]
-        //[ServiceFilter(typeof(PermissionFilter))]
+        [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Active(ActiveUser entity)
         {
-            return await _IUsersHandler.ActiveUsers(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.ActiveUsers(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -202,10 +191,7 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-UsersId-Header': IdUserLogin
-        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -218,10 +204,11 @@ namespace APIs.Controller
         /// </remarks>
 
         [HttpPost]
-        //[ServiceFilter(typeof(PermissionFilter))]
+        [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<InfoOfUsers>> FindById(FindById entity)
         {
-            return await _IUsersHandler.FindById(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.FindById(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), language);
         }
 
         /// <summary>
@@ -235,10 +222,7 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-UsersId-Header': IdUserLogin
-        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -251,10 +235,11 @@ namespace APIs.Controller
         /// 
         /// </remarks>
         [HttpPost]
-        //[ServiceFilter(typeof(PermissionFilter))]
+        [ServiceFilter(typeof(PermissionFilter))]
         public async Task<ResponseTable<InfoOfUsers>> FindAll(FindAll entity)
         {
-            return await _IUsersHandler.FindAll(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersHandler.FindAll(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), language);
         }
     }
 }

@@ -36,10 +36,7 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
-        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -57,7 +54,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Create(CreateRoomsStatus entity)
         {
-            return await _IStatusHandler.CreateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IStatusHandler.CreateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
@@ -75,8 +73,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -91,10 +87,11 @@ namespace APIs.Controller
         /// </remarks>
 
         [HttpPost]
-        //[ServiceFilter(typeof(PermissionFilter))]
+        [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Update(UpdateRoomsStatus entity)
         {
-            return await _IStatusHandler.UpdateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IStatusHandler.UpdateStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -111,8 +108,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -127,7 +122,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Delete(DeleteRoomsStatus entity)
         {
-            return await _IStatusHandler.DeleteStatus(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IStatusHandler.DeleteStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -144,8 +140,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -161,7 +155,8 @@ namespace APIs.Controller
         public async Task<Response<InfoOfRoomsStatus>> FindById(FindById entity)
         {
             string tableName = EnumsTableName.Table.Status.ToString();
-            return await _IFindDataHandler.FindById<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindById<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -178,8 +173,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -195,7 +188,8 @@ namespace APIs.Controller
         public async Task<ResponseTable<InfoOfRoomsStatus>> FindAll(FindAll entity)
         {
             string tableName = EnumsTableName.Table.Status.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindAll<InfoOfRoomsStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }

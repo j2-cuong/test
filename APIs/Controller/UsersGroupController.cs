@@ -36,10 +36,7 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
-        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
-        /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -56,7 +53,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Create(CreateUsersGroup entity)
         {
-            return await _IUsersGroupHandler.CreateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersGroupHandler.CreateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
 
@@ -74,8 +72,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -92,7 +88,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Update(UpdateUsersGroup entity)
         {
-            return await _IUsersGroupHandler.UpdateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersGroupHandler.UpdateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -109,8 +106,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -125,7 +120,8 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Delete(DeleteUsersGroup entity)
         {
-            return await _IUsersGroupHandler.DeleteUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IUsersGroupHandler.DeleteUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -142,8 +138,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -159,7 +153,8 @@ namespace APIs.Controller
         public async Task<Response<InfoOfUsersGroup>> FindById(FindById entity)
         {
             string tableName = EnumsTableName.Table.UsersGroup.ToString();
-            return await _IFindDataHandler.FindById<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindById<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
 
         /// <summary>
@@ -176,8 +171,6 @@ namespace APIs.Controller
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
-        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
-        /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
@@ -193,7 +186,8 @@ namespace APIs.Controller
         public async Task<ResponseTable<InfoOfUsersGroup>> FindAll(FindAll entity)
         {
             string tableName = EnumsTableName.Table.UsersGroup.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
+            var language = HttpContext.Items["UserLanguage"]?.ToString();
+            return await _IFindDataHandler.FindAll<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
         }
     }
 }
