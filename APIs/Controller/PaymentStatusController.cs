@@ -8,6 +8,7 @@ namespace APIs.Controller
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [ControllerDescription("Danh sách trạng thái thanh toán")]
 
     public class PaymentStatusController : BaseApiController
     {
@@ -35,8 +36,10 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
+        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
         /// 
+        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -55,8 +58,7 @@ namespace APIs.Controller
 
         public async Task<Response<bool>> Create(CreatePaymentStatus entity)
         {
-            var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IPaymentStatusHandler.CreatePaymentStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IPaymentStatusHandler.CreatePaymentStatus(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
         }
 
         /// <summary>
@@ -70,7 +72,10 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
+        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
+        /// 
+        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -89,8 +94,7 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Update(UpdatePaymentStatus entity)
         {
-            var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IPaymentStatusHandler.UpdatePaymentStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IPaymentStatusHandler.UpdatePaymentStatus(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
         }
 
         /// <summary>
@@ -104,7 +108,10 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
+        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
+        /// 
+        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -120,8 +127,7 @@ namespace APIs.Controller
         [ServiceFilter(typeof(PermissionFilter))]
         public async Task<Response<bool>> Delete(DeletePaymentStatus entity)
         {
-            var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IPaymentStatusHandler.DeletePaymentStatus(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IPaymentStatusHandler.DeletePaymentStatus(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage());
         }
 
         /// <summary>
@@ -135,7 +141,10 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
+        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
+        /// 
+        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
@@ -152,8 +161,7 @@ namespace APIs.Controller
         public async Task<Response<InfoOfPaymentStatus>> FindById(FindById entity)
         {
             string tableName = EnumsTableName.Table.PaymentStatus.ToString();
-            var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindById<InfoOfPaymentStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindById<InfoOfPaymentStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
         }
 
         /// <summary>
@@ -167,14 +175,16 @@ namespace APIs.Controller
         /// I, Thẻ headers chọn Content-Type : application/json
         /// 
         /// thêm vào trong header 1 tùy chọn : 'X-Custom-Header': IdUserLogin
+        /// 
         /// thêm vào trong header 1 tùy chọn : 'X-RolesId-Header': IdRoles
+        /// 
+        /// thêm vào trong header 1 tùy chọn : 'X-UserLanguage-Header': UserLanguage
         /// 
         /// II, Thẻ body - raw - đổi text thành Json
         /// 
         /// III, Json mẫu
         /// 
         ///     {
-        ///         "IdLogin" : "7004E920-892A-45AE-BBE2-C3E485C370AB",
         ///         "PageSize": 10,
         ///         "PageIndex" : 1
         ///     }
@@ -185,8 +195,7 @@ namespace APIs.Controller
         public async Task<ResponseTable<InfoOfPaymentStatus>> FindAll(FindAll entity)
         {
             string tableName = EnumsTableName.Table.PaymentStatus.ToString();
-            var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfPaymentStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindAll<InfoOfPaymentStatus>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage());
         }
     }
 }

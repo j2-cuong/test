@@ -67,7 +67,7 @@ namespace CommonServices
             }
 
             var message = messageField.GetValue(null)?.ToString();
-            return new Response<T>(mode, message, data);
+            return new Response<T>(mode, message, null);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace CommonServices
             }
 
             var message = messageField.GetValue(null)?.ToString();
-            return new ResponseTable<T>(mode, message, data, data.Length);
+            return new ResponseTable<T>(mode, message, null, 0);
         }
 
         /// <summary>

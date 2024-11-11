@@ -18,7 +18,6 @@ builder.Services.AddJwtToken();
 builder.Services.AddCors();
 
 var app = builder.Build();
-
 // Gọi tới wwwroot
 app.UseStaticFiles();
 

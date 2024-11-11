@@ -50,6 +50,17 @@ public abstract class BaseApiController : ControllerBase
     }
 
     /// <summary>
+    /// Lấy UserLanguages khi truy cập vào controller
+    /// </summary>
+    /// <returns></returns>
+    [NonAction]
+    public string GetLanguage()
+    {
+        string customHeaderValue = Request.Headers["X-UserLanguage-Header"];
+        return customHeaderValue ?? "EN";
+    }
+
+    /// <summary>
     /// Lấy RolesId khi truy cập vào controller
     /// </summary>
     /// <returns></returns>

@@ -113,15 +113,6 @@ namespace APIs.Logic
                     th { background: #4CAF50; color: white; }
                     th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
                     tr:nth-child(even) { background: #f9f9f9; }
-                   tr:hover {
-                        background-color: aqua;
-                    }
-                    tbody tr {
-                        opacity: 0.5;
-                    }
-                    tbody tr:hover {
-                        opacity: 1;
-                    }
                 </style>
             </head>
             <body>

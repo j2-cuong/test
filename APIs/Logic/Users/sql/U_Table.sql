@@ -7,7 +7,7 @@ GO
 
 -- Tạo bảng Users mới
 CREATE TABLE dbo.Users (
-    [UsersId] [uniqueidentifier] NOT NULL PRIMARY KEY,
+    [UsersId] [uniqueidentifier] PRIMARY KEY CONSTRAINT PK_Users_UsersId DEFAULT NEWID(),
 	[UsersName] [nvarchar](100) NOT NULL,
 	[UsersPassword] [nvarchar](100) NOT NULL,
 	[FullName] [nvarchar](200) NOT NULL,
@@ -25,3 +25,23 @@ CREATE TABLE dbo.Users (
 	[UpdateTime] [datetime] NULL,
 );
 GO
+
+-- Tạo chỉ số duy nhất cho full-text search
+CREATE UNIQUE INDEX UIX_Users_UsersId ON Users(UsersId);
+GO
+
+-- Tạo full-text index (Cấu trúc Tên bảng + FTCatalog)
+CREATE FULLTEXT CATALOG UsersFTCatalog AS DEFAULT;
+
+-- Tạo Full Text-Search ( những cột where like N'%%' )
+CREATE FULLTEXT INDEX ON Users
+(
+    [UsersName] LANGUAGE 0,    -- Ngôn ngữ neutral
+    [FullName] LANGUAGE 0,         -- Ngôn ngữ neutral
+    [Address] LANGUAGE 0,           -- Ngôn ngữ neutral
+    [NumberPhone] LANGUAGE 0,           -- Ngôn ngữ neutral
+    [StateIDCard] LANGUAGE 0,           -- Ngôn ngữ neutral
+    [Email] LANGUAGE 0          -- Ngôn ngữ neutral
+)
+KEY INDEX PK_Users_UsersId -- Tên của khóa chính đã tạo bên trên
+ON UsersFTCatalog;

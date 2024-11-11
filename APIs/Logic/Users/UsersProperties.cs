@@ -63,8 +63,6 @@ namespace APIs.Logic
         public IFormFile ImagesFiles { get; set; }
     }
 
-
-
     /// <summary>
     /// Sử dụng cho action chỉnh sửa
     /// </summary>
