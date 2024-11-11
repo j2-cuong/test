@@ -54,7 +54,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Create(CreateUsersGroup entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersGroupHandler.CreateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupHandler.CreateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
 
@@ -89,7 +89,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Update(UpdateUsersGroup entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersGroupHandler.UpdateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupHandler.UpdateUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Delete(DeleteUsersGroup entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersGroupHandler.DeleteUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersGroupHandler.DeleteUsersGroup(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace APIs.Controller
         {
             string tableName = EnumsTableName.Table.UsersGroup.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindById<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindById<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace APIs.Controller
         {
             string tableName = EnumsTableName.Table.UsersGroup.ToString();
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IFindDataHandler.FindAll<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), language);
+            return await _IFindDataHandler.FindAll<InfoOfUsersGroup>(entity, GetClientIp(), tableName, GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
     }
 }

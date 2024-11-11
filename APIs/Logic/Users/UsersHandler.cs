@@ -240,7 +240,7 @@ namespace APIs.Logic
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@PageSize", model.PageSize == 0 ? 10 : model.PageSize);
                 param.Add("@PageIndex", model.PageIndex == 0 ? 1 : model.PageIndex);
-                param.Add("@urlServer", urlServer);
+                param.Add("@Url", urlServer ?? "https://localhost:7223");
 
                 var res = await _dapperUnitOfWork.GetRepository().ExecuteData<InfoOfUsers>("FindAllUsers", param, null);
                 var data = res.ToArray();

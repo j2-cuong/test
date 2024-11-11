@@ -3,6 +3,7 @@
 using APIs.Logic;
 using CommonServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace APIs.Controller
 {
@@ -56,8 +57,7 @@ namespace APIs.Controller
 
         public async Task<Response<bool>> Create(CreateUsersModel entity)
         {
-            var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.CreateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), language);
+            return await _IUsersHandler.CreateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
 
@@ -93,7 +93,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Update(UpdateUsersModel entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.UpdateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), language);
+            return await _IUsersHandler.UpdateUsers(entity, GetClientIp(), GetPath(), GetServerIp(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Delete(DeleteUser entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.DeleteUsers(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersHandler.DeleteUsers(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Block(BlockUser entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.BlockUsers(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersHandler.BlockUsers(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace APIs.Controller
         public async Task<Response<bool>> Active(ActiveUser entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.ActiveUsers(entity, GetClientIp(), GetPath(), GetUsersId(), language);
+            return await _IUsersHandler.ActiveUsers(entity, GetClientIp(), GetPath(), GetUsersId(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace APIs.Controller
         public async Task<Response<InfoOfUsers>> FindById(FindById entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.FindById(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), language);
+            return await _IUsersHandler.FindById(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), GetLanguage() ?? "EN");
         }
 
         /// <summary>
@@ -235,11 +235,11 @@ namespace APIs.Controller
         /// 
         /// </remarks>
         [HttpPost]
-        [ServiceFilter(typeof(PermissionFilter))]
+        //[ServiceFilter(typeof(PermissionFilter))]
         public async Task<ResponseTable<InfoOfUsers>> FindAll(FindAll entity)
         {
             var language = HttpContext.Items["UserLanguage"]?.ToString();
-            return await _IUsersHandler.FindAll(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), language);
+            return await _IUsersHandler.FindAll(entity, GetClientIp(), GetPath(), GetUsersId(), GetServerIp(), GetLanguage() ?? "EN");
         }
     }
 }
